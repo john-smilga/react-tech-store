@@ -34,7 +34,7 @@ export default class Footer extends Component {
 }
 
 const FooterWrapper = styled.footer`
-  background: var(--primaryColor);
+  background: var(--darkGrey);
   color: var(--mainWhite);
   .icon {
     font-size: 1.5rem;
@@ -42,7 +42,7 @@ const FooterWrapper = styled.footer`
     transition: var(--mainTransition);
   }
   .icon:hover {
-    color: var(--mainBlack);
+    color: var(--primaryColor);
     cursor: pointer;
   }
 `;

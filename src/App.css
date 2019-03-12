@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans");
-body {
-  font-family: "Open Sans", sans-serif !important;
-}
+
 :root {
-  --primaryColor: #5fb7ea;
+  --primaryColor: rgb(95, 183, 234);
   --primaryRGBA: rgba(0, 0, 0, 0.3);
   --mainGrey: #fafafa;
   --darkGrey: rgb(95, 94, 94);
@@ -12,15 +10,22 @@ body {
   --mainTransition: all 0.3s ease-in-out;
   --mainSpacing: 0.5rem;
 }
+body {
+  font-family: "Open Sans", sans-serif !important;
+  background: var(--mainGrey);
+  color: var(--mainBlack);
+}
 .text-title {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
+  letter-spacing: var(--mainSpacing);
+  text-transform: capitalize;
 }
 .text-main {
   color: var(--primaryColor);
 }
 .main-link {
-  padding: 1rem 2.5rem;
+  padding: 0.85rem 1.25rem;
   background: var(--primaryColor);
   color: var(--mainWhite);
   display: inline-block;

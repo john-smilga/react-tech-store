@@ -30,7 +30,7 @@ const NavWrapper = styled.nav`
   top: 0;
   width: 100%;
   padding: 1rem 1.5rem;
-  background: var(--mainWhite);
+  background: var(--mainGrey);
   border-bottom: 3px solid var(--primaryColor);
   z-index: 1;
   .nav-center {
