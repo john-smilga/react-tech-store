@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { linkData } from "./linkData";
 import { socialData } from "./socialData";
+import { client } from "./contentful";
 const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
@@ -11,6 +12,9 @@ class ProductProvider extends Component {
     links: linkData,
     socialLinks: socialData
   };
+  componentDidMount() {
+    client.getEntries().then(results => console.log(results));
+  }
   handleSidebar = () => {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   };
