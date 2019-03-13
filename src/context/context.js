@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { linkData } from "./linkData";
 import { socialData } from "./socialData";
 import { client } from "./contentful";
+import { items } from "./productData";
 const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
@@ -10,11 +11,32 @@ class ProductProvider extends Component {
     cartOpen: false,
     totalItems: 4,
     links: linkData,
-    socialLinks: socialData
+    socialLinks: socialData,
+    storeProducts: [],
+    filteredProducts: [],
+    featuredProducts: []
   };
   componentDidMount() {
-    client.getEntries().then(results => console.log(results));
+    this.setProducts(items);
+    // client
+    //   .getEntries({ content_type: "techStoreProduct" })
+    //   .then(results => console.log(results.items));
   }
+  setProducts = products => {
+    let storeProducts = [];
+    products.forEach(({ fields, sys }) => {
+      const product = { ...fields, ...sys };
+      storeProducts = [...storeProducts, product];
+    });
+    // console.log(storeProducts);
+
+    let featuredProducts = storeProducts.filter(item => item.featured === true);
+    this.setState({
+      storeProducts,
+      filteredProducts: storeProducts,
+      featuredProducts
+    });
+  };
   handleSidebar = () => {
     this.setState({ sidebarOpen: !this.state.sidebarOpen });
   };

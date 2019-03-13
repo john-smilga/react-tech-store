@@ -12,7 +12,7 @@
 }
 body {
   font-family: "Open Sans", sans-serif !important;
-  background: var(--mainGrey);
+  background: var(--mainGrey) !important;
   color: var(--mainBlack);
 }
 .text-title {
