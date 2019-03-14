@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans");
 
 :root {
-  --primaryColor: rgb(95, 183, 234);
+  --primaryColor: #5fb7ea;
   --primaryRGBA: rgba(0, 0, 0, 0.3);
   --mainGrey: #fafafa;
   --darkGrey: rgb(95, 94, 94);

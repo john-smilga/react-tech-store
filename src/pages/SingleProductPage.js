@@ -10,12 +10,14 @@ export default function SingleProductPage() {
       <Hero img={singleProductImg} title="single product" />
       <ProductConsumer>
         {value => {
-          const { singleProduct, addToCart } = value;
+          const { singleProduct, addToCart, loading } = value;
+          if (loading) {
+            return <h1>product loading...</h1>;
+          }
 
           const { company, description, id, price, title } = singleProduct;
           const { url } = singleProduct.image.fields.file;
           console.log(url);
-
           return (
             <ProductWrapper className="py-5">
               <div className="container">
@@ -28,13 +30,13 @@ export default function SingleProductPage() {
                     />
                   </div>
                   <div className="col-10 mx-auto col-sm-8 col-md-6 my-3">
-                    <h4 className="text-title">model :{title}</h4>
-                    <h4 className="text-capitalize text-muted my-2">
+                    <h5 className="text-title mb-4">model :{title}</h5>
+                    <h5 className="text-capitalize text-muted mb-4">
                       company : {company}
-                    </h4>
-                    <h4 className="text-main text-capitalize">
+                    </h5>
+                    <h5 className="text-main text-capitalize  mb-4">
                       price : ${price}
-                    </h4>
+                    </h5>
                     <p className="text-capitalize text-title mt-3">
                       some info about product :
                     </p>
