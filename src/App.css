@@ -25,7 +25,7 @@ body {
   color: var(--primaryColor);
 }
 .main-link {
-  padding: 0.85rem 1.25rem;
+  padding: 0.5rem 1rem;
   background: var(--primaryColor);
   color: var(--mainWhite);
   display: inline-block;
