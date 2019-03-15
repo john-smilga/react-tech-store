@@ -4,7 +4,7 @@
   --primaryColor: #5fb7ea;
   --primaryRGBA: rgba(0, 0, 0, 0.3);
   --mainGrey: #fafafa;
-  --darkGrey: rgb(95, 94, 94);
+  --darkGrey: #5f5e5e;
   --mainWhite: #fff;
   --mainBlack: #222;
   --mainTransition: all 0.3s ease-in-out;
@@ -41,4 +41,7 @@ body {
   text-decoration: none;
   color: var(--primaryColor);
   outline-color: var(--darkGrey);
+}
+.cart-icon {
+  cursor: pointer;
 }

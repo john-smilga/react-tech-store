@@ -40,11 +40,14 @@ class ProductProvider extends Component {
   };
 
   // component did mount
-  componentDidMount() {
+  async componentDidMount() {
+    const result = await client.getEntries({
+      content_type: "techStoreProducts"
+    });
+    const items = await result.items;
+    console.log(items);
+
     this.setProducts(items);
-    // client
-    //   .getEntries({ content_type: "techStoreProduct" })
-    //   .then(results => console.log(results.items));
   }
   // set products
   setProducts = products => {
@@ -88,9 +91,11 @@ class ProductProvider extends Component {
       subTotal += item.total;
       cartItems += item.count;
     });
-    const tempTax = subTotal * 0.1;
-    const tax = parseFloat(tempTax.toFixed(2));
-    const total = subTotal + tax;
+    subTotal = parseFloat(subTotal.toFixed(2));
+    let tax = subTotal * 0.1;
+    tax = parseFloat(tax.toFixed(2));
+    let total = subTotal + tax;
+    total = parseFloat(total.toFixed(2));
     return {
       cartItems,
       subTotal,
@@ -128,6 +133,7 @@ class ProductProvider extends Component {
     } else {
       tempItem.count++;
       tempItem.total = tempItem.price * tempItem.count;
+      tempItem.total = parseFloat(tempItem.total.toFixed(2));
     }
     // console.log(product);
 
@@ -140,6 +146,7 @@ class ProductProvider extends Component {
       () => {
         this.addTotals();
         this.syncStorage();
+        this.openCart();
       }
     );
   };
@@ -154,6 +161,84 @@ class ProductProvider extends Component {
       () => console.log(this.state.singleProduct)
     );
   };
+  // cart functionality
+
+  increment = id => {
+    let tempCart = [...this.state.cart];
+    const cartItem = tempCart.find(item => {
+      return item.id === id;
+    });
+    // const index = tempCart.indexOf(selectedProduct);
+    // const product = tempCart[index];
+    cartItem.count++;
+    cartItem.total = cartItem.count * cartItem.price;
+    cartItem.total = parseFloat(cartItem.total.toFixed(2));
+
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart]
+        };
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      }
+    );
+  };
+  decrement = id => {
+    let tempCart = [...this.state.cart];
+    const cartItem = tempCart.find(item => {
+      return item.id === id;
+    });
+
+    cartItem.count = cartItem.count - 1;
+    if (cartItem.count === 0) {
+      this.removeItem(id);
+    } else {
+      cartItem.total = cartItem.count * cartItem.price;
+      cartItem.total = parseFloat(cartItem.total.toFixed(2));
+
+      this.setState(
+        () => {
+          return { cart: [...tempCart] };
+        },
+        () => {
+          this.addTotals();
+          this.syncStorage();
+        }
+      );
+    }
+  };
+  removeItem = id => {
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter(item => {
+      return item.id !== id;
+    });
+
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart]
+        };
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      }
+    );
+  };
+  clearCart = () => {
+    this.setState(
+      {
+        cart: []
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      }
+    );
+  };
   render() {
     return (
       <ProductContext.Provider
@@ -161,8 +246,13 @@ class ProductProvider extends Component {
           ...this.state,
           handleSidebar: this.handleSidebar,
           handleCart: this.handleCart,
+          closeCart: this.closeCart,
           addToCart: this.addToCart,
-          setSingleProduct: this.setSingleProduct
+          setSingleProduct: this.setSingleProduct,
+          increment: this.increment,
+          decrement: this.decrement,
+          removeItem: this.removeItem,
+          clearCart: this.clearCart
         }}
       >
         {this.props.children}

@@ -17,14 +17,15 @@ export default function SingleProductPage() {
 
           const { company, description, id, price, title } = singleProduct;
           const { url } = singleProduct.image.fields.file;
-          console.log(url);
+          // console.log(url);
           return (
             <ProductWrapper className="py-5">
               <div className="container">
                 <div className="row">
                   <div className="col-10 mx-auto col-sm-8 col-md-6 my-3">
                     <img
-                      src={`../${url}`}
+                      // src={`../${url}`}
+                      src={url}
                       alt="single product"
                       className="img-fluid"
                     />

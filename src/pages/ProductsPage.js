@@ -5,7 +5,7 @@ import Products from "../components/ProductsPage/Products";
 export default function ProductsPage() {
   return (
     <>
-      <Hero title="our products" img={productsBcg} />
+      <Hero img={productsBcg} />
       <Products />
     </>
   );

@@ -7,7 +7,7 @@ export default function Products() {
   return (
     <ProductConsumer>
       {value => {
-        const { storeProducts } = value;
+        const { filteredProducts } = value;
         return (
           <ProductsWrapper className="py-5">
             <div className="container">
@@ -15,7 +15,7 @@ export default function Products() {
               <Title center title="our products" />
               {/* products */}
               <div className="row py-5">
-                {storeProducts.map(product => {
+                {filteredProducts.map(product => {
                   return <Product key={product.id} product={product} />;
                 })}
               </div>

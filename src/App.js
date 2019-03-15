@@ -15,12 +15,14 @@ import { Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import SideCart from "./components/SideCart";
 class App extends Component {
   render() {
     return (
       <>
         <Navbar />
         <Sidebar />
+        <SideCart />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/about" component={About} />
