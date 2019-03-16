@@ -43,6 +43,14 @@ export default function Contact() {
                 placeholder="hello there buddy"
               />
             </div>
+            {/* submit */}
+            <div className="form-group mt-3">
+              <input
+                type="submit"
+                value="send"
+                className="form-control bg-primary text-white"
+              />
+            </div>
           </form>
         </div>
       </div>

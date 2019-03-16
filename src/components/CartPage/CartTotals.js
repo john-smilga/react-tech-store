@@ -15,9 +15,9 @@ export default function CartTotals() {
                 >
                   clear cart
                 </button>
-                <h3>subtotal : {cartSubTotal}</h3>
-                <h3>tax : {cartTax}</h3>
-                <h3>total : {cartTotal}</h3>
+                <h3>subtotal : ${cartSubTotal}</h3>
+                <h3>tax : ${cartTax}</h3>
+                <h3>total : ${cartTotal}</h3>
               </div>
             );
           }}

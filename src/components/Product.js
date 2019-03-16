@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaCartPlus } from "react-icons/fa";
 import { ProductConsumer } from "../context";
 export default function Product({ product }) {
-  const { url } = product.image.fields.file;
-
   return (
     <ProductConsumer>
       {value => {
@@ -16,7 +14,7 @@ export default function Product({ product }) {
             <div className="card">
               <div className="img-container">
                 <img
-                  src={url}
+                  src={product.image}
                   className="card-img-top p-5"
                   alt="product"
                   style={{ height: "320px" }}

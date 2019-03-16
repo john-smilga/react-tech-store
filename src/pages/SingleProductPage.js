@@ -15,8 +15,15 @@ export default function SingleProductPage() {
             return <h1>product loading...</h1>;
           }
 
-          const { company, description, id, price, title } = singleProduct;
-          const { url } = singleProduct.image.fields.file;
+          const {
+            company,
+            description,
+            id,
+            price,
+            title,
+            image
+          } = singleProduct;
+
           // console.log(url);
           return (
             <ProductWrapper className="py-5">
@@ -25,7 +32,7 @@ export default function SingleProductPage() {
                   <div className="col-10 mx-auto col-sm-8 col-md-6 my-3">
                     <img
                       // src={`../${url}`}
-                      src={url}
+                      src={image}
                       alt="single product"
                       className="img-fluid"
                     />

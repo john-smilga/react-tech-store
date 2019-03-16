@@ -20,7 +20,13 @@ class ProductProvider extends Component {
     filteredProducts: [],
     featuredProducts: [],
     singleProduct: {},
-    loading: true
+    loading: true,
+    search: "",
+    price: 50,
+    min: 0,
+    max: 1500,
+    company: "all",
+    shipping: false
   };
   // handle sidebar
   handleSidebar = () => {
@@ -53,7 +59,8 @@ class ProductProvider extends Component {
   setProducts = products => {
     let storeProducts = products.map(item => {
       const { id } = item.sys;
-      const product = { id, ...item.fields };
+      const image = item.fields.image.fields.file.url;
+      const product = { id, ...item.fields, image };
       return product;
     });
     // console.log(storeProducts);
@@ -239,6 +246,23 @@ class ProductProvider extends Component {
       }
     );
   };
+  // handle change
+  handleChange = event => {
+    const name = event.target.name;
+    console.log(event.target.type);
+
+    const value =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    this.setState(
+      {
+        [name]: value
+      },
+      this.sortData
+    );
+  };
+  sortData = () => {};
   render() {
     return (
       <ProductContext.Provider
@@ -252,7 +276,8 @@ class ProductProvider extends Component {
           increment: this.increment,
           decrement: this.decrement,
           removeItem: this.removeItem,
-          clearCart: this.clearCart
+          clearCart: this.clearCart,
+          handleChange: this.handleChange
         }}
       >
         {this.props.children}
