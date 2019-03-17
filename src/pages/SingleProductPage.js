@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import singleProductImg from "../images/singleProductBcg.jpeg";
-import styled from "styled-components";
 import { ProductConsumer } from "../context";
 export default function SingleProductPage() {
   return (
@@ -11,9 +10,9 @@ export default function SingleProductPage() {
       <ProductConsumer>
         {value => {
           const { singleProduct, addToCart, loading } = value;
-          if (loading) {
-            return <h1>product loading...</h1>;
-          }
+          // if (loading) {
+          //   return <h1>product loading...</h1>;
+          // }
 
           const {
             company,
@@ -26,7 +25,7 @@ export default function SingleProductPage() {
 
           // console.log(url);
           return (
-            <ProductWrapper className="py-5">
+            <section className="py-5">
               <div className="container">
                 <div className="row">
                   <div className="col-10 mx-auto col-sm-8 col-md-6 my-3">
@@ -68,12 +67,10 @@ export default function SingleProductPage() {
                   </div>
                 </div>
               </div>
-            </ProductWrapper>
+            </section>
           );
         }}
       </ProductConsumer>
     </>
   );
 }
-
-const ProductWrapper = styled.section``;

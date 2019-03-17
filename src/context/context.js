@@ -20,7 +20,7 @@ class ProductProvider extends Component {
     filteredProducts: [],
     featuredProducts: [],
     singleProduct: {},
-    loading: true,
+    // loading: true,
     search: "",
     price: 50,
     min: 0,
@@ -71,8 +71,8 @@ class ProductProvider extends Component {
         filteredProducts: storeProducts,
         featuredProducts,
         cart: this.getStorageCart(),
-        singleProduct: this.getStorageProduct(),
-        loading: false
+        singleProduct: this.getStorageProduct()
+        // loading: false
       },
       () => this.addTotals()
     );
@@ -162,8 +162,8 @@ class ProductProvider extends Component {
     localStorage.setItem("singleProduct", JSON.stringify(product));
     this.setState(
       {
-        singleProduct: { ...product },
-        loading: false
+        singleProduct: { ...product }
+        // loading: false
       },
       () => console.log(this.state.singleProduct)
     );
