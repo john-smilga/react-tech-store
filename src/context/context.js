@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { linkData } from "./linkData";
 import { socialData } from "./socialData";
 import { client } from "./contentful";
-import { items } from "./productData";
+// import { items } from "./productData";
 const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
@@ -20,11 +20,11 @@ class ProductProvider extends Component {
     filteredProducts: [],
     featuredProducts: [],
     singleProduct: {},
-    // loading: true,
+    loading: true,
     search: "",
-    price: 50,
+    price: 0,
     min: 0,
-    max: 1500,
+    max: 0,
     company: "all",
     shipping: false
   };
@@ -51,7 +51,7 @@ class ProductProvider extends Component {
       content_type: "techStoreProducts"
     });
     const items = await result.items;
-    console.log(items);
+    // console.log(items);
 
     this.setProducts(items);
   }
@@ -65,14 +65,18 @@ class ProductProvider extends Component {
     });
     // console.log(storeProducts);
     let featuredProducts = storeProducts.filter(item => item.featured === true);
+    let maxPrice = Math.max(...storeProducts.map(item => item.price));
+
     this.setState(
       {
         storeProducts,
         filteredProducts: storeProducts,
         featuredProducts,
         cart: this.getStorageCart(),
-        singleProduct: this.getStorageProduct()
-        // loading: false
+        singleProduct: this.getStorageProduct(),
+        loading: false,
+        price: maxPrice,
+        max: maxPrice
       },
       () => this.addTotals()
     );
@@ -162,8 +166,8 @@ class ProductProvider extends Component {
     localStorage.setItem("singleProduct", JSON.stringify(product));
     this.setState(
       {
-        singleProduct: { ...product }
-        // loading: false
+        singleProduct: { ...product },
+        loading: false
       },
       () => console.log(this.state.singleProduct)
     );
@@ -249,7 +253,6 @@ class ProductProvider extends Component {
   // handle change
   handleChange = event => {
     const name = event.target.name;
-    console.log(event.target.type);
 
     const value =
       event.target.type === "checkbox"
@@ -262,7 +265,34 @@ class ProductProvider extends Component {
       this.sortData
     );
   };
-  sortData = () => {};
+  sortData = () => {
+    const { storeProducts, price, company, shipping, search } = this.state;
+    let tempProducts = [...storeProducts];
+
+    // filter by price
+    tempProducts = tempProducts.filter(item => item.price <= price);
+    // filter by company
+    if (company !== "all") {
+      tempProducts = tempProducts.filter(item => item.company === company);
+    }
+    // free shipping
+    if (shipping) {
+      tempProducts = tempProducts.filter(item => item.freeShipping === true);
+    }
+    if (search.length > 0) {
+      tempProducts = tempProducts.filter(item => {
+        let tempSearch = search.toLowerCase();
+        let tempTitle = item.title.toLowerCase().slice(0, search.length);
+
+        if (tempSearch === tempTitle) {
+          return item;
+        }
+      });
+    }
+    this.setState({
+      filteredProducts: tempProducts
+    });
+  };
   render() {
     return (
       <ProductContext.Provider

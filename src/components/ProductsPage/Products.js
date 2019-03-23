@@ -27,7 +27,7 @@ export default function Products() {
               {/* products */}
               <div className="row my-5">
                 {filteredProducts.length === 0 ? (
-                  <div className="col text-title">
+                  <div className="col text-title text-center">
                     sorry, no items matched you search
                   </div>
                 ) : (

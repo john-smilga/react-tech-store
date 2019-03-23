@@ -10,9 +10,11 @@ export default function SingleProductPage() {
       <ProductConsumer>
         {value => {
           const { singleProduct, addToCart, loading } = value;
-          // if (loading) {
-          //   return <h1>product loading...</h1>;
-          // }
+          if (loading) {
+            console.log("hello loading");
+
+            return <h1>product loading...</h1>;
+          }
 
           const {
             company,
