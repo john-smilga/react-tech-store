@@ -21,6 +21,7 @@ class ProductProvider extends Component {
     featuredProducts: [],
     singleProduct: {},
     loading: true,
+
     search: "",
     price: 0,
     min: 0,
@@ -65,6 +66,7 @@ class ProductProvider extends Component {
     });
     // console.log(storeProducts);
     let featuredProducts = storeProducts.filter(item => item.featured === true);
+    // get max price
     let maxPrice = Math.max(...storeProducts.map(item => item.price));
 
     this.setState(
@@ -250,6 +252,7 @@ class ProductProvider extends Component {
       }
     );
   };
+
   // handle change
   handleChange = event => {
     const name = event.target.name;
