@@ -272,12 +272,12 @@ class ProductProvider extends Component {
     const { storeProducts, price, company, shipping, search } = this.state;
     let tempProducts = [...storeProducts];
 
-    // filter by price
-    tempProducts = tempProducts.filter(item => item.price <= price);
     // filter by company
     if (company !== "all") {
       tempProducts = tempProducts.filter(item => item.company === company);
     }
+    // filter by price
+    tempProducts = tempProducts.filter(item => item.price <= price);
     // free shipping
     if (shipping) {
       tempProducts = tempProducts.filter(item => item.freeShipping === true);
